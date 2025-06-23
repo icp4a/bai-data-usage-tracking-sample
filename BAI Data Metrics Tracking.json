@@ -1,0 +1,1125 @@
+{
+    "id" : "zncbhJQBdoe4PDAq07ay",
+    "name" : "BAI Data Metrics Tracking",
+    "description" : "Displays number of documents and storage in each monitoring source, and average document sizes. \nShows latest values and evolution over time.",
+    "owner" : "BaiBuiltin",
+    "type" : "TEMPLATE",
+    "visualizations" : [ {
+      "id" : "8f064849-32b1-4d4f-a122-b1317bfc365a",
+      "name" : "Number of documents",
+      "description" : "",
+      "config" : {
+        "type" : "MetricConfigDto",
+        "domain" : {
+          "kind" : "BAI Data Metrics",
+          "id" : "*",
+          "name" : "ALL",
+          "fields" : [ "*" ],
+          "fieldValues" : [ "*" ],
+          "timestampField" : "timestamp",
+          "hasSuggestions" : false
+        },
+        "filters" : [ {
+          "field" : "monitoring_source",
+          "op" : "Eq",
+          "values" : [ "Totals" ]
+        }, {
+          "field" : "id",
+          "op" : "Eq",
+          "values" : [ "latest-totals" ]
+        } ],
+        "fieldAggregation" : {
+          "aggregations" : [ {
+            "field" : "number_of_documents",
+            "kind" : "Max"
+          } ],
+          "groups" : [ ],
+          "drill" : false,
+          "_version" : 2
+        },
+        "settings" : {
+          "type" : "SingleSettingsTextDto",
+          "displayTitle" : true,
+          "unit" : "Documents",
+          "_version" : 1
+        },
+        "_version" : 1
+      },
+      "layouts" : [ {
+        "kind" : "SM",
+        "x" : 0.0,
+        "y" : 14.0,
+        "w" : 1.0,
+        "h" : 2.0
+      }, {
+        "kind" : "LG",
+        "x" : 0.0,
+        "y" : 0.0,
+        "w" : 1.0,
+        "h" : 1.0
+      } ],
+      "showAsTable" : false
+    }, {
+      "id" : "76563b6f-3b3d-4c7d-9847-e71aa0310b3f",
+      "name" : "Average document size",
+      "description" : "",
+      "config" : {
+        "type" : "MetricConfigDto",
+        "domain" : {
+          "kind" : "BAI Data Metrics",
+          "id" : "*",
+          "name" : "ALL",
+          "fields" : [ "*" ],
+          "fieldValues" : [ "*" ],
+          "timestampField" : "timestamp",
+          "hasSuggestions" : false
+        },
+        "filters" : [ {
+          "field" : "monitoring_source",
+          "op" : "Eq",
+          "values" : [ "Totals" ]
+        }, {
+          "field" : "id",
+          "op" : "Eq",
+          "values" : [ "latest-totals" ]
+        } ],
+        "fieldAggregation" : {
+          "aggregations" : [ {
+            "field" : "average_document_size_bytes",
+            "kind" : "Max"
+          } ],
+          "groups" : [ ],
+          "drill" : false,
+          "_version" : 2
+        },
+        "settings" : {
+          "type" : "SingleSettingsTextDto",
+          "displayTitle" : true,
+          "unit" : "Bytes",
+          "_version" : 1
+        },
+        "_version" : 1
+      },
+      "layouts" : [ {
+        "kind" : "SM",
+        "x" : 0.0,
+        "y" : 18.0,
+        "w" : 1.0,
+        "h" : 2.0
+      }, {
+        "kind" : "LG",
+        "x" : 4.0,
+        "y" : 0.0,
+        "w" : 1.0,
+        "h" : 1.0
+      } ],
+      "showAsTable" : false
+    }, {
+      "id" : "52e8eff8-73ec-4b91-9fe6-feeb2d20ba03",
+      "name" : "Average Document Size per Index",
+      "description" : "",
+      "config" : {
+        "type" : "MetricConfigDto",
+        "domain" : {
+          "kind" : "BAI Data Metrics",
+          "id" : "*",
+          "name" : "ALL",
+          "fields" : [ "*" ],
+          "fieldValues" : [ "*" ],
+          "timestampField" : "timestamp",
+          "hasSuggestions" : false
+        },
+        "timeWindow" : {
+          "type" : "RelativeTimeWindowDto",
+          "value" : 1,
+          "intervalKind" : "DAY"
+        },
+        "filters" : [ {
+          "field" : "monitoring_source",
+          "op" : "NotEq",
+          "values" : [ "Totals" ]
+        } ],
+        "fieldAggregation" : {
+          "aggregations" : [ {
+            "field" : "average_document_size_bytes",
+            "kind" : "Max"
+          } ],
+          "groups" : [ {
+            "field" : "monitoring_source"
+          } ],
+          "drill" : false,
+          "_version" : 2
+        },
+        "settings" : {
+          "type" : "SingleSettingsBarDto",
+          "displayTitle" : false,
+          "unit" : "Bytes",
+          "legend" : {
+            "displayLegend" : true,
+            "displayTitle" : true,
+            "title" : "",
+            "position" : "bottom"
+          },
+          "labelYAxis" : "Average Document Size",
+          "verticalDirection" : true,
+          "stacked" : true,
+          "chartValueLabel" : {
+            "displayed" : false,
+            "format" : "Value",
+            "location" : "center"
+          },
+          "_version" : 1
+        },
+        "_version" : 1
+      },
+      "layouts" : [ {
+        "kind" : "SM",
+        "x" : 0.0,
+        "y" : 4.0,
+        "w" : 1.0,
+        "h" : 2.0
+      }, {
+        "kind" : "LG",
+        "x" : 4.0,
+        "y" : 1.0,
+        "w" : 2.0,
+        "h" : 3.0
+      } ],
+      "showAsTable" : false
+    }, {
+      "id" : "ea7dd662-2d6c-4ba9-822f-58b18446da5d",
+      "name" : "Count of measurements",
+      "description" : "",
+      "config" : {
+        "type" : "MetricTrendConfigDto",
+        "domain" : {
+          "kind" : "BAI Data Metrics",
+          "id" : "*",
+          "name" : "ALL",
+          "fields" : [ "*" ],
+          "fieldValues" : [ "*" ],
+          "timestampField" : "timestamp",
+          "hasSuggestions" : false
+        },
+        "fieldAggregation" : {
+          "aggregations" : [ {
+            "field" : "",
+            "kind" : "Count"
+          } ],
+          "groups" : [ {
+            "field" : "monitoring_source"
+          } ],
+          "drill" : false,
+          "_version" : 2
+        },
+        "interval" : {
+          "type" : "FixedIntervalDto",
+          "unit" : "HOUR",
+          "value" : 1
+        },
+        "timestampField" : "timestamp",
+        "settings" : {
+          "type" : "TrendSettingsBarDto",
+          "displayTitle" : true,
+          "unit" : "Date/time",
+          "legend" : {
+            "displayLegend" : true,
+            "displayTitle" : true,
+            "title" : "",
+            "position" : "right",
+            "iconShape" : "circle"
+          },
+          "labelYAxis" : "",
+          "verticalDirection" : true,
+          "stacked" : true,
+          "chartValueLabel" : {
+            "displayed" : true,
+            "format" : "Value",
+            "location" : "center"
+          },
+          "_version" : 1
+        },
+        "predictionConfig" : {
+          "enabled" : false,
+          "_version" : 2
+        }
+      },
+      "layouts" : [ {
+        "kind" : "SM",
+        "x" : 0.0,
+        "y" : 12.0,
+        "w" : 1.0,
+        "h" : 2.0
+      }, {
+        "kind" : "LG",
+        "x" : 0.0,
+        "y" : 8.0,
+        "w" : 6.0,
+        "h" : 2.0
+      } ],
+      "showAsTable" : false
+    }, {
+      "id" : "2a5fd280-9244-4923-9001-e2cd4ea72069",
+      "name" : "Storage size",
+      "description" : "",
+      "config" : {
+        "type" : "MetricConfigDto",
+        "domain" : {
+          "kind" : "BAI Data Metrics",
+          "id" : "*",
+          "name" : "ALL",
+          "fields" : [ "*" ],
+          "fieldValues" : [ "*" ],
+          "timestampField" : "timestamp",
+          "hasSuggestions" : false
+        },
+        "filters" : [ {
+          "field" : "monitoring_source",
+          "op" : "Eq",
+          "values" : [ "Totals" ]
+        }, {
+          "field" : "id",
+          "op" : "Eq",
+          "values" : [ "latest-totals" ]
+        } ],
+        "fieldAggregation" : {
+          "aggregations" : [ {
+            "field" : "global_storage_size_megabytes",
+            "kind" : "Max"
+          } ],
+          "groups" : [ ],
+          "drill" : false,
+          "_version" : 2
+        },
+        "settings" : {
+          "type" : "SingleSettingsTextDto",
+          "displayTitle" : true,
+          "unit" : "MegaBytes",
+          "_version" : 1
+        },
+        "_version" : 1
+      },
+      "layouts" : [ {
+        "kind" : "SM",
+        "x" : 0.0,
+        "y" : 16.0,
+        "w" : 1.0,
+        "h" : 2.0
+      }, {
+        "kind" : "LG",
+        "x" : 2.0,
+        "y" : 0.0,
+        "w" : 1.0,
+        "h" : 1.0
+      } ],
+      "showAsTable" : false
+    }, {
+      "id" : "81d9cd5b-6fd7-4ae1-826f-c71d9dcbf37a",
+      "name" : "Recent Measurements Table",
+      "description" : "",
+      "config" : {
+        "type" : "TableConfigDto",
+        "domain" : {
+          "kind" : "BAI Data Metrics",
+          "id" : "*",
+          "name" : "ALL",
+          "fields" : [ "*" ],
+          "fieldValues" : [ "*" ],
+          "timestampField" : "timestamp",
+          "hasSuggestions" : false
+        },
+        "timeWindow" : {
+          "type" : "RelativeTimeWindowDto",
+          "value" : 7,
+          "intervalKind" : "DAY"
+        },
+        "columns" : [ {
+          "field" : "id",
+          "label" : ""
+        }, {
+          "field" : "timestamp",
+          "label" : ""
+        }, {
+          "field" : "monitoring_source",
+          "label" : ""
+        }, {
+          "field" : "number_of_documents",
+          "label" : ""
+        }, {
+          "field" : "global_storage_size_megabytes",
+          "label" : ""
+        }, {
+          "field" : "global_storage_size_bytes",
+          "label" : ""
+        }, {
+          "field" : "average_document_size_bytes",
+          "label" : ""
+        } ]
+      },
+      "layouts" : [ {
+        "kind" : "SM",
+        "x" : 0.0,
+        "y" : 20.0,
+        "w" : 1.0,
+        "h" : 2.0
+      }, {
+        "kind" : "LG",
+        "x" : 0.0,
+        "y" : 6.0,
+        "w" : 6.0,
+        "h" : 2.0
+      } ],
+      "showAsTable" : false
+    }, {
+      "id" : "0b6aa18c-c535-41ab-99a9-d012959e33a1",
+      "name" : "Storage size per index",
+      "description" : "",
+      "config" : {
+        "type" : "MetricConfigDto",
+        "domain" : {
+          "kind" : "BAI Data Metrics",
+          "id" : "*",
+          "name" : "ALL",
+          "fields" : [ "*" ],
+          "fieldValues" : [ "*" ],
+          "timestampField" : "timestamp",
+          "hasSuggestions" : false
+        },
+        "timeWindow" : {
+          "type" : "RelativeTimeWindowDto",
+          "value" : 1,
+          "intervalKind" : "DAY"
+        },
+        "filters" : [ {
+          "field" : "monitoring_source",
+          "op" : "NotEq",
+          "values" : [ "Totals" ]
+        } ],
+        "fieldAggregation" : {
+          "aggregations" : [ {
+            "field" : "global_storage_size_megabytes",
+            "kind" : "Max"
+          } ],
+          "groups" : [ {
+            "field" : "monitoring_source"
+          } ],
+          "drill" : false,
+          "_version" : 2
+        },
+        "settings" : {
+          "type" : "SingleSettingsPieDto",
+          "displayTitle" : false,
+          "unit" : "MegaBytes",
+          "legend" : {
+            "displayLegend" : true,
+            "displayTitle" : true,
+            "title" : "",
+            "position" : "bottom"
+          },
+          "pieChartLabelDisplayed" : true,
+          "pieChartLabelFormat" : "Value",
+          "_version" : 1
+        },
+        "_version" : 1
+      },
+      "layouts" : [ {
+        "kind" : "SM",
+        "x" : 0.0,
+        "y" : 2.0,
+        "w" : 1.0,
+        "h" : 2.0
+      }, {
+        "kind" : "LG",
+        "x" : 2.0,
+        "y" : 1.0,
+        "w" : 2.0,
+        "h" : 3.0
+      } ],
+      "showAsTable" : false
+    }, {
+      "id" : "d1acbfcc-f215-4be9-89ca-43b17d414db5",
+      "name" : "Storage Size over time",
+      "description" : "",
+      "config" : {
+        "type" : "KpiTrendConfigDto",
+        "domain" : {
+          "kind" : "BAI Data Metrics",
+          "id" : "*",
+          "name" : "ALL",
+          "fields" : [ "*" ],
+          "fieldValues" : [ "*" ],
+          "timestampField" : "timestamp",
+          "hasSuggestions" : false
+        },
+        "filters" : [ {
+          "field" : "monitoring_source",
+          "op" : "NotEq",
+          "values" : [ "Totals" ]
+        }, {
+          "field" : "id",
+          "op" : "NotEq",
+          "values" : [ "latest-totals" ]
+        } ],
+        "fieldAggregation" : {
+          "aggregations" : [ {
+            "field" : "global_storage_size_megabytes",
+            "kind" : "Max"
+          } ],
+          "groups" : [ {
+            "field" : "monitoring_source"
+          } ],
+          "drill" : false,
+          "_version" : 2
+        },
+        "interval" : {
+          "type" : "FixedIntervalDto",
+          "unit" : "MINUTE",
+          "value" : 15
+        },
+        "timestampField" : "timestamp",
+        "settings" : {
+          "type" : "TrendSettingsBarDto",
+          "displayTitle" : true,
+          "unit" : "Date",
+          "legend" : {
+            "displayLegend" : true,
+            "displayTitle" : true,
+            "title" : "",
+            "position" : "right",
+            "iconShape" : "circle"
+          },
+          "labelYAxis" : "Global Storage (MegaBytes)",
+          "verticalDirection" : true,
+          "stacked" : true,
+          "chartValueLabel" : {
+            "displayed" : true,
+            "format" : "Value",
+            "location" : "center"
+          },
+          "_version" : 1
+        },
+        "thresholds" : [ {
+          "name" : "Overage threshold",
+          "value" : 8192.0,
+          "ranges" : [ {
+            "name" : "In Plan",
+            "start" : "min",
+            "end" : "8192",
+            "color" : "#198038"
+          }, {
+            "name" : "Overage",
+            "start" : "8192",
+            "end" : "max",
+            "color" : "#fa4d56"
+          } ]
+        } ],
+        "predictionConfig" : {
+          "enabled" : false,
+          "nextPrediction" : {
+            "type" : "CalendarIntervalDto",
+            "unit" : "DAY"
+          },
+          "lowerBound" : 0.0,
+          "_version" : 2
+        }
+      },
+      "layouts" : [ {
+        "kind" : "SM",
+        "x" : 0.0,
+        "y" : 8.0,
+        "w" : 1.0,
+        "h" : 2.0
+      }, {
+        "kind" : "LG",
+        "x" : 2.0,
+        "y" : 4.0,
+        "w" : 2.0,
+        "h" : 2.0
+      } ],
+      "showAsTable" : false
+    }, {
+      "id" : "b6b76e4c-0019-4f88-8fea-1f3a1342f036",
+      "name" : "Number of Docs over time",
+      "description" : "",
+      "config" : {
+        "type" : "KpiTrendConfigDto",
+        "domain" : {
+          "kind" : "BAI Data Metrics",
+          "id" : "*",
+          "name" : "ALL",
+          "fields" : [ "*" ],
+          "fieldValues" : [ "*" ],
+          "timestampField" : "timestamp",
+          "hasSuggestions" : false
+        },
+        "filters" : [ {
+          "field" : "monitoring_source",
+          "op" : "NotEq",
+          "values" : [ "Totals" ]
+        } ],
+        "fieldAggregation" : {
+          "aggregations" : [ {
+            "field" : "number_of_documents",
+            "kind" : "Max"
+          } ],
+          "groups" : [ {
+            "field" : "monitoring_source"
+          } ],
+          "drill" : false,
+          "_version" : 2
+        },
+        "interval" : {
+          "type" : "FixedIntervalDto",
+          "unit" : "MINUTE",
+          "value" : 15
+        },
+        "timestampField" : "timestamp",
+        "settings" : {
+          "type" : "TrendSettingsBarDto",
+          "displayTitle" : true,
+          "unit" : "Date",
+          "legend" : {
+            "displayLegend" : true,
+            "displayTitle" : true,
+            "title" : "",
+            "position" : "right",
+            "iconShape" : "circle"
+          },
+          "labelYAxis" : "Number of Documents",
+          "verticalDirection" : true,
+          "stacked" : true,
+          "chartValueLabel" : {
+            "displayed" : true,
+            "format" : "Value",
+            "location" : "center"
+          },
+          "_version" : 1
+        },
+        "thresholds" : [ {
+          "name" : "Overage threshold",
+          "value" : 1000000.0,
+          "ranges" : [ {
+            "name" : "In Plan",
+            "start" : "min",
+            "end" : "1000000",
+            "color" : "#198038"
+          }, {
+            "name" : "Overage",
+            "start" : "1000000",
+            "end" : "max",
+            "color" : "#fa4d56"
+          } ]
+        } ],
+        "predictionConfig" : {
+          "enabled" : false,
+          "nextPrediction" : {
+            "type" : "CalendarIntervalDto",
+            "unit" : "WEEK"
+          },
+          "lowerBound" : 0.0,
+          "_version" : 2
+        }
+      },
+      "layouts" : [ {
+        "kind" : "SM",
+        "x" : 0.0,
+        "y" : 6.0,
+        "w" : 1.0,
+        "h" : 2.0
+      }, {
+        "kind" : "LG",
+        "x" : 0.0,
+        "y" : 4.0,
+        "w" : 2.0,
+        "h" : 2.0
+      } ],
+      "showAsTable" : false
+    }, {
+      "id" : "fecf34ed-3a93-4b36-a5a0-d9fc0e993586",
+      "name" : "Average Document Size over time",
+      "description" : "",
+      "config" : {
+        "type" : "KpiTrendConfigDto",
+        "domain" : {
+          "kind" : "BAI Data Metrics",
+          "id" : "*",
+          "name" : "ALL",
+          "fields" : [ "*" ],
+          "fieldValues" : [ "*" ],
+          "timestampField" : "timestamp",
+          "hasSuggestions" : false
+        },
+        "filters" : [ {
+          "field" : "monitoring_source",
+          "op" : "NotEq",
+          "values" : [ "Totals" ]
+        }, {
+          "field" : "id",
+          "op" : "NotEq",
+          "values" : [ "latest-totals" ]
+        } ],
+        "fieldAggregation" : {
+          "aggregations" : [ {
+            "field" : "average_document_size_bytes",
+            "kind" : "Max"
+          } ],
+          "groups" : [ {
+            "field" : "monitoring_source"
+          } ],
+          "drill" : false,
+          "_version" : 2
+        },
+        "interval" : {
+          "type" : "FixedIntervalDto",
+          "unit" : "MINUTE",
+          "value" : 15
+        },
+        "timestampField" : "timestamp",
+        "settings" : {
+          "type" : "TrendSettingsBarDto",
+          "displayTitle" : true,
+          "unit" : "Date",
+          "legend" : {
+            "displayLegend" : true,
+            "displayTitle" : true,
+            "title" : "",
+            "position" : "right",
+            "iconShape" : "circle"
+          },
+          "labelYAxis" : "Average Document Size",
+          "verticalDirection" : true,
+          "stacked" : true,
+          "chartValueLabel" : {
+            "displayed" : true,
+            "format" : "Value",
+            "location" : "center"
+          },
+          "_version" : 1
+        },
+        "predictionConfig" : {
+          "enabled" : false,
+          "_version" : 2
+        }
+      },
+      "layouts" : [ {
+        "kind" : "SM",
+        "x" : 0.0,
+        "y" : 10.0,
+        "w" : 1.0,
+        "h" : 2.0
+      }, {
+        "kind" : "LG",
+        "x" : 4.0,
+        "y" : 4.0,
+        "w" : 2.0,
+        "h" : 2.0
+      } ],
+      "showAsTable" : false
+    }, {
+      "id" : "803edf1a-d183-4c7d-aa09-c67b9d795705",
+      "name" : "Average Document Size over time",
+      "description" : "",
+      "config" : {
+        "type" : "KpiTrendConfigDto",
+        "domain" : {
+          "kind" : "BAI Data Metrics",
+          "id" : "*",
+          "name" : "ALL",
+          "fields" : [ "*" ],
+          "fieldValues" : [ "*" ],
+          "timestampField" : "timestamp",
+          "hasSuggestions" : false
+        },
+        "filters" : [ {
+          "field" : "monitoring_source",
+          "op" : "Eq",
+          "values" : [ "Totals" ]
+        }, {
+          "field" : "id",
+          "op" : "NotEq",
+          "values" : [ "latest-totals" ]
+        } ],
+        "fieldAggregation" : {
+          "aggregations" : [ {
+            "field" : "average_document_size_bytes",
+            "kind" : "Max"
+          } ],
+          "groups" : [ ],
+          "drill" : false,
+          "_version" : 2
+        },
+        "interval" : {
+          "type" : "FixedIntervalDto",
+          "unit" : "MINUTE",
+          "value" : 15
+        },
+        "timestampField" : "timestamp",
+        "settings" : {
+          "type" : "TrendSettingsLineDto",
+          "displayTitle" : false,
+          "unit" : "Date",
+          "legend" : {
+            "displayLegend" : true,
+            "displayTitle" : true,
+            "title" : "",
+            "position" : "right",
+            "iconShape" : "circle"
+          },
+          "labelYAxis" : "Average Document Size",
+          "stacked" : true,
+          "_version" : 1
+        },
+        "thresholds" : [ {
+          "name" : "Expected Size",
+          "value" : 2000.0,
+          "ranges" : [ {
+            "name" : "Below expected",
+            "start" : "min",
+            "end" : "2000",
+            "color" : "#198038"
+          }, {
+            "name" : "Above expected",
+            "start" : "2000",
+            "end" : "max",
+            "color" : "#ee5396"
+          } ]
+        } ],
+        "predictionConfig" : {
+          "enabled" : false,
+          "_version" : 2
+        }
+      },
+      "layouts" : [ {
+        "kind" : "SM",
+        "x" : 0.0,
+        "y" : 26.0,
+        "w" : 1.0,
+        "h" : 2.0
+      }, {
+        "kind" : "LG",
+        "x" : 5.0,
+        "y" : 0.0,
+        "w" : 1.0,
+        "h" : 1.0
+      } ],
+      "showAsTable" : false
+    }, {
+      "id" : "61956205-1f7a-405e-a7b6-d977423df20c",
+      "name" : "Total Number of Docs over time",
+      "description" : "",
+      "config" : {
+        "type" : "KpiTrendConfigDto",
+        "domain" : {
+          "kind" : "BAI Data Metrics",
+          "id" : "*",
+          "name" : "ALL",
+          "fields" : [ "*" ],
+          "fieldValues" : [ "*" ],
+          "timestampField" : "timestamp",
+          "hasSuggestions" : false
+        },
+        "filters" : [ {
+          "field" : "monitoring_source",
+          "op" : "Eq",
+          "values" : [ "Totals" ]
+        } ],
+        "fieldAggregation" : {
+          "aggregations" : [ {
+            "field" : "number_of_documents",
+            "kind" : "Max"
+          } ],
+          "groups" : [ ],
+          "drill" : false,
+          "_version" : 2
+        },
+        "interval" : {
+          "type" : "FixedIntervalDto",
+          "unit" : "MINUTE",
+          "value" : 15
+        },
+        "timestampField" : "timestamp",
+        "settings" : {
+          "type" : "TrendSettingsLineDto",
+          "displayTitle" : false,
+          "unit" : "Date",
+          "legend" : {
+            "displayLegend" : true,
+            "displayTitle" : true,
+            "title" : "",
+            "position" : "right",
+            "iconShape" : "circle"
+          },
+          "labelYAxis" : "Number of Documents",
+          "stacked" : true,
+          "_version" : 1
+        },
+        "thresholds" : [ {
+          "name" : "Overage threshold",
+          "value" : 1000000.0,
+          "ranges" : [ {
+            "name" : "In Plan",
+            "start" : "min",
+            "end" : "1000000",
+            "color" : "#198038"
+          }, {
+            "name" : "Overage",
+            "start" : "1000000",
+            "end" : "max",
+            "color" : "#fa4d56"
+          } ]
+        } ],
+        "alertsConfig" : [ {
+          "id" : "e7501028-3c74-4fa0-ba1c-3ffb3d029963",
+          "kind" : "HitTargetUp",
+          "message" : "Number of Documents exceeds limit",
+          "targetName" : "Overage threshold",
+          "targetType" : "Threshold",
+          "priority" : "High"
+        } ],
+        "predictionConfig" : {
+          "enabled" : false,
+          "nextPrediction" : {
+            "type" : "CalendarIntervalDto",
+            "unit" : "WEEK"
+          },
+          "lowerBound" : 0.0,
+          "_version" : 2
+        }
+      },
+      "layouts" : [ {
+        "kind" : "SM",
+        "x" : 0.0,
+        "y" : 24.0,
+        "w" : 1.0,
+        "h" : 2.0
+      }, {
+        "kind" : "LG",
+        "x" : 1.0,
+        "y" : 0.0,
+        "w" : 1.0,
+        "h" : 1.0
+      } ],
+      "showAsTable" : false
+    }, {
+      "id" : "25a2c95e-3b64-4097-9a3a-fcdde854572c",
+      "name" : "Number of documents per index",
+      "description" : "",
+      "config" : {
+        "type" : "MetricConfigDto",
+        "domain" : {
+          "kind" : "BAI Data Metrics",
+          "id" : "*",
+          "name" : "ALL",
+          "fields" : [ "*" ],
+          "fieldValues" : [ "*" ],
+          "timestampField" : "timestamp",
+          "hasSuggestions" : false
+        },
+        "timeWindow" : {
+          "type" : "RelativeTimeWindowDto",
+          "value" : 1,
+          "intervalKind" : "DAY"
+        },
+        "filters" : [ {
+          "field" : "monitoring_source",
+          "op" : "NotEq",
+          "values" : [ "Totals" ]
+        } ],
+        "fieldAggregation" : {
+          "aggregations" : [ {
+            "field" : "number_of_documents",
+            "kind" : "Max"
+          } ],
+          "groups" : [ {
+            "field" : "monitoring_source"
+          } ],
+          "drill" : false,
+          "_version" : 2
+        },
+        "settings" : {
+          "type" : "SingleSettingsPieDto",
+          "displayTitle" : false,
+          "unit" : "Documents ",
+          "legend" : {
+            "displayLegend" : true,
+            "displayTitle" : true,
+            "title" : "",
+            "position" : "bottom"
+          },
+          "pieChartLabelDisplayed" : true,
+          "pieChartLabelFormat" : "Value",
+          "_version" : 1
+        },
+        "_version" : 1
+      },
+      "layouts" : [ {
+        "kind" : "SM",
+        "x" : 0.0,
+        "y" : 0.0,
+        "w" : 1.0,
+        "h" : 2.0
+      }, {
+        "kind" : "LG",
+        "x" : 0.0,
+        "y" : 1.0,
+        "w" : 2.0,
+        "h" : 3.0
+      } ],
+      "showAsTable" : false
+    }, {
+      "id" : "8eba25c1-9474-452d-86ed-afb129475d11",
+      "name" : "Total Storage Size over time",
+      "description" : "",
+      "config" : {
+        "type" : "KpiTrendConfigDto",
+        "domain" : {
+          "kind" : "BAI Data Metrics",
+          "id" : "*",
+          "name" : "ALL",
+          "fields" : [ "*" ],
+          "fieldValues" : [ "*" ],
+          "timestampField" : "timestamp",
+          "hasSuggestions" : false
+        },
+        "filters" : [ {
+          "field" : "monitoring_source",
+          "op" : "Eq",
+          "values" : [ "Totals" ]
+        }, {
+          "field" : "id",
+          "op" : "NotEq",
+          "values" : [ "latest-totals" ]
+        } ],
+        "fieldAggregation" : {
+          "aggregations" : [ {
+            "field" : "global_storage_size_megabytes",
+            "kind" : "Max"
+          } ],
+          "groups" : [ ],
+          "drill" : false,
+          "_version" : 2
+        },
+        "interval" : {
+          "type" : "FixedIntervalDto",
+          "unit" : "MINUTE",
+          "value" : 15
+        },
+        "timestampField" : "timestamp",
+        "settings" : {
+          "type" : "TrendSettingsLineDto",
+          "displayTitle" : false,
+          "unit" : "Date",
+          "legend" : {
+            "displayLegend" : true,
+            "displayTitle" : true,
+            "title" : "",
+            "position" : "right",
+            "iconShape" : "circle"
+          },
+          "labelYAxis" : "Global Storage (MegaBytes)",
+          "stacked" : true,
+          "_version" : 1
+        },
+        "thresholds" : [ {
+          "name" : "In plan 256",
+          "value" : 256.0,
+          "ranges" : [ {
+            "name" : "In Plan < 256",
+            "start" : "min",
+            "end" : "256",
+            "color" : "#00c080"
+          }, {
+            "name" : "In Plan < 512",
+            "start" : "256",
+            "end" : "512",
+            "color" : "#009d9a"
+          } ]
+        }, {
+          "name" : "In Plan 512",
+          "value" : 512.0,
+          "ranges" : [ {
+            "name" : "In Plan < 1024",
+            "start" : "512",
+            "end" : "1024",
+            "color" : "#198038"
+          } ]
+        }, {
+          "name" : "In Plan 1024",
+          "value" : 1024.0,
+          "ranges" : [ {
+            "name" : "In Plan < 2048",
+            "start" : "1024",
+            "end" : "2048",
+            "color" : "#005d5d"
+          } ]
+        }, {
+          "name" : "In Plan 2048",
+          "value" : 2048.0,
+          "ranges" : [ {
+            "name" : "In Plan < 4096",
+            "start" : "2048",
+            "end" : "4096",
+            "color" : "#fa4d56"
+          } ]
+        }, {
+          "name" : "In Plan 4096",
+          "value" : 4096.0,
+          "ranges" : [ {
+            "name" : "In Plan < 8192",
+            "start" : "4096",
+            "end" : "8192",
+            "color" : "#ee5396"
+          } ]
+        }, {
+          "name" : "Overage threshold",
+          "value" : 8192.0,
+          "ranges" : [ {
+            "name" : "Overage",
+            "start" : "8192",
+            "end" : "max",
+            "color" : "#9f1853"
+          } ]
+        } ],
+        "alertsConfig" : [ {
+          "id" : "66116968-185f-4919-9301-3ac0bf97e4d7",
+          "kind" : "HitTargetUp",
+          "message" : "Storage Size Exceeded",
+          "targetName" : "Overage threshold",
+          "targetType" : "Threshold",
+          "priority" : "High"
+        } ],
+        "predictionConfig" : {
+          "enabled" : false,
+          "nextPrediction" : {
+            "type" : "CalendarIntervalDto",
+            "unit" : "DAY"
+          },
+          "lowerBound" : 0.0,
+          "_version" : 2
+        }
+      },
+      "layouts" : [ {
+        "kind" : "SM",
+        "x" : 0.0,
+        "y" : 22.0,
+        "w" : 1.0,
+        "h" : 2.0
+      }, {
+        "kind" : "LG",
+        "x" : 3.0,
+        "y" : 0.0,
+        "w" : 1.0,
+        "h" : 1.0
+      } ],
+      "showAsTable" : false
+    } ],
+    "timeWindow" : {
+      "type" : "RelativeTimeWindowDto",
+      "value" : 1,
+      "intervalKind" : "MONTH"
+    },
+    "creation" : "2025-01-20T14:26:43.758Z",
+    "lastUpdate" : "2025-04-14T10:13:46.868122925Z",
+    "goalsLayout" : [ ],
+    "_dashboardVersion" : 5
+  }
