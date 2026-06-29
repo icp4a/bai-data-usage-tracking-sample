@@ -23,15 +23,11 @@
           "field" : "monitoring_source",
           "op" : "Eq",
           "values" : [ "Totals" ]
-        }, {
-          "field" : "id",
-          "op" : "Eq",
-          "values" : [ "latest-totals" ]
         } ],
         "fieldAggregation" : {
           "aggregations" : [ {
             "field" : "number_of_documents",
-            "kind" : "Max"
+            "kind" : "Latest"
           } ],
           "groups" : [ ],
           "drill" : false,
@@ -78,15 +74,11 @@
           "field" : "monitoring_source",
           "op" : "Eq",
           "values" : [ "Totals" ]
-        }, {
-          "field" : "id",
-          "op" : "Eq",
-          "values" : [ "latest-totals" ]
         } ],
         "fieldAggregation" : {
           "aggregations" : [ {
             "field" : "average_document_size_bytes",
-            "kind" : "Max"
+            "kind" : "Latest"
           } ],
           "groups" : [ ],
           "drill" : false,
@@ -152,7 +144,7 @@
         },
         "settings" : {
           "type" : "SingleSettingsBarDto",
-          "displayTitle" : false,
+          "displayTitle" : true,
           "unit" : "Bytes",
           "legend" : {
             "displayLegend" : true,
@@ -277,15 +269,11 @@
           "field" : "monitoring_source",
           "op" : "Eq",
           "values" : [ "Totals" ]
-        }, {
-          "field" : "id",
-          "op" : "Eq",
-          "values" : [ "latest-totals" ]
         } ],
         "fieldAggregation" : {
           "aggregations" : [ {
             "field" : "global_storage_size_megabytes",
-            "kind" : "Max"
+            "kind" : "Latest"
           } ],
           "groups" : [ ],
           "drill" : false,
@@ -408,7 +396,7 @@
         },
         "settings" : {
           "type" : "SingleSettingsPieDto",
-          "displayTitle" : false,
+          "displayTitle" : true,
           "unit" : "MegaBytes",
           "legend" : {
             "displayLegend" : true,
@@ -455,10 +443,6 @@
           "field" : "monitoring_source",
           "op" : "NotEq",
           "values" : [ "Totals" ]
-        }, {
-          "field" : "id",
-          "op" : "NotEq",
-          "values" : [ "latest-totals" ]
         } ],
         "fieldAggregation" : {
           "aggregations" : [ {
@@ -653,10 +637,6 @@
           "field" : "monitoring_source",
           "op" : "NotEq",
           "values" : [ "Totals" ]
-        }, {
-          "field" : "id",
-          "op" : "NotEq",
-          "values" : [ "latest-totals" ]
         } ],
         "fieldAggregation" : {
           "aggregations" : [ {
@@ -734,15 +714,11 @@
           "field" : "monitoring_source",
           "op" : "Eq",
           "values" : [ "Totals" ]
-        }, {
-          "field" : "id",
-          "op" : "NotEq",
-          "values" : [ "latest-totals" ]
         } ],
         "fieldAggregation" : {
           "aggregations" : [ {
             "field" : "average_document_size_bytes",
-            "kind" : "Max"
+            "kind" : "Latest"
           } ],
           "groups" : [ ],
           "drill" : false,
@@ -756,7 +732,7 @@
         "timestampField" : "timestamp",
         "settings" : {
           "type" : "TrendSettingsLineDto",
-          "displayTitle" : false,
+          "displayTitle" : true,
           "unit" : "Date",
           "legend" : {
             "displayLegend" : true,
@@ -826,7 +802,7 @@
         "fieldAggregation" : {
           "aggregations" : [ {
             "field" : "number_of_documents",
-            "kind" : "Max"
+            "kind" : "Latest"
           } ],
           "groups" : [ ],
           "drill" : false,
@@ -840,7 +816,7 @@
         "timestampField" : "timestamp",
         "settings" : {
           "type" : "TrendSettingsLineDto",
-          "displayTitle" : false,
+          "displayTitle" : true,
           "unit" : "Date",
           "legend" : {
             "displayLegend" : true,
@@ -938,7 +914,7 @@
         },
         "settings" : {
           "type" : "SingleSettingsPieDto",
-          "displayTitle" : false,
+          "displayTitle" : true,
           "unit" : "Documents ",
           "legend" : {
             "displayLegend" : true,
@@ -985,15 +961,11 @@
           "field" : "monitoring_source",
           "op" : "Eq",
           "values" : [ "Totals" ]
-        }, {
-          "field" : "id",
-          "op" : "NotEq",
-          "values" : [ "latest-totals" ]
         } ],
         "fieldAggregation" : {
           "aggregations" : [ {
             "field" : "global_storage_size_megabytes",
-            "kind" : "Max"
+            "kind" : "Latest"
           } ],
           "groups" : [ ],
           "drill" : false,
@@ -1007,7 +979,7 @@
         "timestampField" : "timestamp",
         "settings" : {
           "type" : "TrendSettingsLineDto",
-          "displayTitle" : false,
+          "displayTitle" : true,
           "unit" : "Date",
           "legend" : {
             "displayLegend" : true,

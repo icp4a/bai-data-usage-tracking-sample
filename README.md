@@ -81,7 +81,7 @@ Note: Make sure OPENSEARCH_URL, OPENSEARCH_USERNAME, and OPENSEARCH_PASSWORD are
 ```
 ENVIRONMENT="RUN" ./bai-data-metrics.sh
 ```
-If the script executes successfully, you can verify it by checking the latest total document records at the end of the output.<br/>
+If the script executes successfully, you can verify it by checking the totals record in the output.<br/>
 
 After an initialization phase, where a new index is created in OpenSearch to store the metrics, the script iterates over all the monitoring sources declared in the monitoring source index (which is generally an alias over a set of indices), and on each one, performs the following measurements:
 
@@ -90,8 +90,7 @@ After an initialization phase, where a new index is created in OpenSearch to sto
 * Estimates the cumulative size of the source documents in the index by multiplying the average document size by the total document count.
 
 The script then creates a JSON record with the various measurements for each monitoring source, and writes it to the aforementioned metrics index with a measurement timestamp.
-It finally creates a JSON record with the totals across the measured monitoring sources and writes it once with the measurement timestamp and a new unique identifier (so that each measurement is kept and evolution can be measured) and also with a fixed 'latest-totals' identifier, so that it is easy to look for the last measured metrics.
-
+It finally creates a JSON record with the totals across the measured monitoring sources and writes it with the measurement timestamp and a new unique identifier, so that each measurement is kept and its evolution can be measured. In 25.0.1 and later versions, the dashboard can use the Latest aggregation on the totals records to display the current value.
 It is recommended to run the script at regular intervals (for example, in a daily CronJob) for continuous monitoring of storage evolution over time.
 ### Visualize the Data in BPC
 
@@ -113,9 +112,9 @@ In BPC (Business Performance Center), you can view the data metrics.
 The BAI Data Metrics Tracking dashboard provides insights into document count, storage usage, and data evolution trends from the monitoring sources. Below are the descriptions of each chart available in the dashboard:
 
 * **Number of documents**: The KPI chart on its right shows the evolution of the total number of documents. It uses a configurable threshold and alert, so that you can know where the number of documents is compared to some limits.
-* **Storage size**: Indicates the global storage usage (in megabytes) based on the latest totals data.
+* **Storage size**: Indicates the global storage usage (in megabytes) based on the most recent totals data selected with the Latest aggregation.
 The KPI chart on its right shows the evolution of the global storage size. It uses a configurable set of thresholds and alerts, so that you can know where the current used storage stands compared to some limits.
-* **Average document size**: Shows the average document size (in bytes) in the latest data (all monitoring sources combined)
+* **Average document size**: Shows the average document size (in bytes) in the most recent data selected with the Latest aggregation (all monitoring sources combined)
 The KPI chart on its right shows the evolution of the average storage size. It uses a configurable threshold so that you can know where the average document size is compared to your expectations.
 * **Number of documents per monitoring source**: A pie chart visualizing the distribution of document counts across all monitoring sources. As documents are in general only added, the count keeps growing, so the chart displays the max value observed in the last day.
 * **Storage size per index**: A pie chart representing how storage is divided among various monitoring sources.
