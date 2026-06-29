@@ -3,7 +3,7 @@
 ##################################################################
 # Licensed Materials - Property of IBM
 #  5737-I23
-#  Copyright IBM Corp. 2025. All Rights Reserved.
+#  Copyright IBM Corp. 2025, 2026. All Rights Reserved.
 #  U.S. Government Users Restricted Rights:
 #  Use, duplication or disclosure restricted by GSA ADP Schedule
 #  Contract with IBM Corp.
@@ -318,8 +318,7 @@ function processMonitoringSource() {
 # To compute and send total values, by
 # - computing a global average size (not as an average of averages)
 # - converting the total size in megabytes
-# - building and POSTing a document for totals - twice, one with a fixed DB id, 
-#   so that it overrides the previous one and always represents the latest (or current) values
+# - building and POSTing a document for totals
 function sendTotalValues() {
   local total_timestamp
   total_timestamp="$1"
@@ -355,13 +354,6 @@ function sendTotalValues() {
   curlPOST "icp4ba-bai-datametrics-tracking-ibm-bai/_doc" "$total_json_payload" > /dev/null
 
   echo "Document for Totals: $total_json_payload"
-      
-  # we also post a special 'latest' record that will be used in dashboards to get the always up to date latest values
-  total_json_payload=$(echo "$total_json_payload" | jq --arg id "latest-totals" '.id = $id')
-
-  curlPOST "icp4ba-bai-datametrics-tracking-ibm-bai/_doc/latest" "$total_json_payload" > /dev/null
-
-  echo "Latest totals document with constant ID: $total_json_payload"
 }
 
 # To run the full sequence :
